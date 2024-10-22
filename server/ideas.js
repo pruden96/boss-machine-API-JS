@@ -11,7 +11,7 @@ ideasRouter.param('ideaId', validateID);
 ideasRouter.get('/', getRequestAll);
 
 ideasRouter.get('/:ideaId', (req, res, next) => {
-    const idea = getFromDatabaseById('ideas', req.elementId);
+    const idea = getFromDatabaseById('ideas', req.params.ideaId);
     res.status(200).send(idea);
 });
 
@@ -36,7 +36,7 @@ ideasRouter.put('/:ideaId', (req, res, next) => {
     }
 }, checkMillionDollarIdea, (req, res) => {
     const ideaObject = req.body;
-    ideaObject.id = req.elementId;
+    ideaObject.id = req.params.ideaId;
     const updatedIdea = updateInstanceInDatabase('ideas', ideaObject);
     if(updatedIdea) {
         res.send(updatedIdea);
@@ -46,7 +46,7 @@ ideasRouter.put('/:ideaId', (req, res, next) => {
 });
 
 ideasRouter.delete('/:ideaId', (req, res, next) => {
-    const deleted = deleteFromDatabasebyId('ideas', req.elementId);
+    const deleted = deleteFromDatabasebyId('ideas', req.params.ideaId);
     if(deleted) {
         res.status(204).send();
     }

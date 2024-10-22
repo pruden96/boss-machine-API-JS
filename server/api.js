@@ -18,7 +18,7 @@ function validateID (req, res, next, id, name) {
     const modelName = (name === 'workId') ? 'work' : name.slice(0, -2) + 's';
     const element = getFromDatabaseById(modelName, elementId);
     if (element) {
-        req.elementId = elementId;
+        // req.elementId = elementId;
         next();
     } else {
         res.status(404).send();

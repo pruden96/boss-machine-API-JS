@@ -20,14 +20,14 @@ minionsRouter.post('/', (req, res, next) => {
 });
 
 minionsRouter.get('/:minionId', (req, res, next) => {
-    //console.log(req.elementId);
-    const ResponseMinion = getFromDatabaseById('minions', req.elementId);
+    //console.log(req.params.minionId);
+    const ResponseMinion = getFromDatabaseById('minions', req.params.minionId);
     res.status(200).send(ResponseMinion);
 });
 
 minionsRouter.put('/:minionId', (req, res, next) => {
     const minionObject = req.body;
-    minionObject.id = req.elementId;
+    minionObject.id = req.params.minionId;
     const updatedMinion = updateInstanceInDatabase('minions', minionObject);
     if (updatedMinion) {
         res.send(updatedMinion);
@@ -37,7 +37,7 @@ minionsRouter.put('/:minionId', (req, res, next) => {
 });
 
 minionsRouter.delete('/:minionId', (req, res, next) => {
-    const deleted = deleteFromDatabasebyId('minions', req.elementId);
+    const deleted = deleteFromDatabasebyId('minions', req.params.minionId);
     if (deleted) {
         res.status(204).send();
     }

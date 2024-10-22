@@ -21,6 +21,7 @@ const { apiRouter } = require('./server/api');
 const minionsRouter = require('./server/minions');
 const ideasRouter = require('./server/ideas');
 const meetingsRouter = require('./server/meetings');
+const workRouter = require('./server/work');
 
 app.use('/api', apiRouter);
 
@@ -29,6 +30,7 @@ app.use('/api', apiRouter);
 apiRouter.use('/minions', minionsRouter);
 apiRouter.use('/ideas', ideasRouter);
 apiRouter.use('/meetings', meetingsRouter);
+minionsRouter.use('/:minionId/work', workRouter);
 
 module.exports = app;
 
